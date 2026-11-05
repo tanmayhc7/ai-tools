@@ -42,6 +42,8 @@ cp assets/logo.png "$APP/Contents/Resources/logo.png"
 
 # Hardened runtime: ignores DYLD_INSERT_LIBRARIES, enforces library validation,
 # and (with no get-task-allow entitlement) blocks debugger attachment.
+# Files in iCloud-synced folders (e.g. Desktop) carry Finder metadata that codesign rejects.
+xattr -cr "$APP"
 codesign --force --options runtime --entitlements KeyVault.entitlements --sign - "$APP" >/dev/null
 echo "✓ Built $APP"
 echo "  Run:     open \"$APP\""
