@@ -59,8 +59,17 @@ cp agent/keyvault_client.py "$APP/Contents/Resources/keyvault_client.py"
 # Hardened runtime: ignores DYLD_INSERT_LIBRARIES, enforces library validation,
 # and (with no get-task-allow entitlement) blocks debugger attachment.
 # Files in iCloud-synced folders (e.g. Desktop) carry Finder metadata that codesign rejects.
-xattr -cr "$APP"
-codesign --force --options runtime --entitlements KeyVault.entitlements --sign - "$APP" >/dev/null
+# Cloud-synced folders can re-attach Finder metadata at any moment, so clean and sign in a retry loop.
+signed=0
+for attempt in 1 2 3 4 5; do
+  xattr -cr "$APP"
+  if codesign --force --options runtime --entitlements KeyVault.entitlements --sign - "$APP" >/dev/null 2>&1; then signed=1; break; fi
+  sleep 1
+done
+if [ "$signed" != 1 ]; then
+  echo "✗ Code signing failed. If this folder is synced (iCloud, Dropbox), copy the project somewhere unsynced and build there."
+  exit 1
+fi
 echo "✓ Built $APP"
 echo "  Run:     open \"$APP\""
 echo "  Install: cp -R \"$APP\" /Applications/"
