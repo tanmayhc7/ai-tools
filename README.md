@@ -6,7 +6,7 @@ A growing collection of small, practical tools for people who build with AI. The
 
 | | Tool | What it does |
 |---|---|---|
-| <img src="keyvault/assets/logo.png" width="40"> | **[KeyVault](keyvault/)** | An encrypted vault for your API keys (OpenAI, Anthropic, Stripe and others). AES-256-GCM encryption, auto-lock, a self-clearing clipboard and built-in backups. |
+| <img src="keyvault/assets/logo.png" width="40"> | **[KeyVault](keyvault/)** | An encrypted vault for your API keys (OpenAI, Anthropic, Stripe and others). AES-256-GCM encryption, auto-lock, a self-clearing clipboard and built-in backups. Can optionally hand one key to your scripts or AI agents, only when you approve. |
 | <img src="leakguard/assets/logo.png" width="40"> | **[LeakGuard](leakguard/)** | Finds API keys that leaked into your code, including ones buried in old git commits, and installs a git hook that blocks new leaks. Can also check for your exact KeyVault keys. |
 | <img src="redact/assets/logo.png" width="40"> | **[Redact](redact/)** | Replaces names, emails, phone numbers, card numbers and keys with placeholders before you paste text into an AI, then puts the real values back into the AI's answer. |
 | <img src="contextpack/assets/logo.png" width="40"> | **[ContextPack](contextpack/)** | Bundles a code project into one prompt-ready block of text. It respects `.gitignore`, shows token counts, never reads `.env` or key files, and redacts secrets. |

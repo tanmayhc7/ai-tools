@@ -23,6 +23,11 @@ final class VaultStore: ObservableObject {
     @Published private(set) var phase: Phase
     @Published private(set) var entries: [APIKeyEntry] = []
     @Published private(set) var unlockBlockedUntil: Date?
+    /// Set while a program is waiting for the vault to be unlocked, so the lock screen can say why.
+    @Published var unlockRequestNote: String?
+    /// Called whenever the vault locks, so agent grants are revoked at the same moment.
+    var onLock: (() -> Void)?
+    private(set) var agent: AgentAccess!
     @Published var autoLockMinutes: Int {
         didSet { UserDefaults.standard.set(autoLockMinutes, forKey: "autoLockMinutes") }
     }
@@ -52,13 +57,14 @@ final class VaultStore: ObservableObject {
     nonisolated static var vaultURL: URL { directoryURL.appendingPathComponent("vault.json") }
     nonisolated static var backupsURL: URL { directoryURL.appendingPathComponent("Backups", isDirectory: true) }
 
-    init() {
+    init(approver: (any Approving)? = nil, agentConfig: AccessController.Config = .init()) {
         let saved = UserDefaults.standard.object(forKey: "autoLockMinutes") as? Int
         autoLockMinutes = saved ?? 5
         phase = FileManager.default.fileExists(atPath: Self.vaultURL.path) ? .locked : .setup
         let until = UserDefaults.standard.double(forKey: "unlockBlockedUntil")
         if until > Date().timeIntervalSince1970 { unlockBlockedUntil = Date(timeIntervalSince1970: until) }
         installLockTriggers()
+        agent = AgentAccess(store: self, approver: approver ?? ApprovalPresenter(), config: agentConfig)
     }
 
     // MARK: Single instance
@@ -123,6 +129,7 @@ final class VaultStore: ObservableObject {
         entries = contents.entries
         lastActivity = Date()
         phase = .unlocked
+        unlockRequestNote = nil
         if file.iterations < VaultCrypto.upgradeThreshold {
             Task { try? await upgradeKDF(password: password) }
         }
@@ -147,6 +154,7 @@ final class VaultStore: ObservableObject {
         entries = []
         clearClipboardIfOurs()
         if phase == .unlocked { phase = .locked }
+        onLock?()
     }
 
     func changePassword(current: String, new: String) async throws {
@@ -331,7 +339,7 @@ final class VaultStore: ObservableObject {
         return try Data(contentsOf: url)
     }
 
-    nonisolated private static func ensureDirectory(_ url: URL) throws {
+    nonisolated static func ensureDirectory(_ url: URL) throws {
         let fm = FileManager.default
         try fm.createDirectory(at: url, withIntermediateDirectories: true, attributes: [.posixPermissions: 0o700])
         try fm.setAttributes([.posixPermissions: 0o700], ofItemAtPath: url.path)

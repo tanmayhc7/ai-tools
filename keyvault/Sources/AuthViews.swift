@@ -112,6 +112,11 @@ struct UnlockView: View {
     var body: some View {
         AuthCard(title: "KeyVault is locked",
                  subtitle: "Enter your master password to unlock.") {
+            if let note = store.unlockRequestNote {
+                Label { Text(verbatim: note).font(.callout) } icon: { Image(systemName: "key.radiowaves.forward") }
+                    .foregroundStyle(.orange)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            }
             SecureField("Master password", text: $password)
                 .focused($focused)
                 .onSubmit(unlock)

@@ -12,6 +12,8 @@ enum EditorTarget: Identifiable {
 
 struct VaultView: View {
     @EnvironmentObject private var store: VaultStore
+    @EnvironmentObject private var agent: AgentAccess
+    @Local private var showingAgents = false
     @Local private var selection: APIKeyEntry.ID?
     @Local private var search = ""
     @Local private var editing: EditorTarget?
@@ -66,6 +68,9 @@ struct VaultView: View {
                         Text("30 minutes").tag(30)
                         Text("Never").tag(0)
                     }
+                    Button(agent.grants.isEmpty ? "Agent Access…" : "Agent Access (\(agent.grants.count) active)…") {
+                        showingAgents = true
+                    }
                     Divider()
                     Button("Export Encrypted Backup…") { exportBackup() }
                     Button("Show Vault File in Finder") {
@@ -87,6 +92,7 @@ struct VaultView: View {
             }
         }
         .sheet(isPresented: $changingPassword) { ChangePasswordView() }
+        .sheet(isPresented: $showingAgents) { AgentAccessView() }
         .alert("Something went wrong", isPresented: Binding(get: { errorMessage != nil },
                                                              set: { if !$0 { errorMessage = nil } })) {
             Button("OK", role: .cancel) {}

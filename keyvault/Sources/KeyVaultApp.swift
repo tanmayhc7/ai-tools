@@ -52,6 +52,7 @@ struct KeyVaultApp: App {
         Window("KeyVault", id: "main") {
             RootView()
                 .environmentObject(store)
+                .environmentObject(store.agent)
                 .frame(minWidth: 780, minHeight: 500)
         }
         .defaultSize(width: 920, height: 600)
@@ -63,12 +64,4 @@ struct KeyVaultApp: App {
             }
         }
     }
-}
-
-enum Logo {
-    static let image: NSImage = {
-        if let url = Bundle.main.url(forResource: "logo", withExtension: "png"),
-           let img = NSImage(contentsOf: url) { return img }
-        return NSApp.applicationIconImage
-    }()
 }

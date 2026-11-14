@@ -33,12 +33,28 @@ echo "→ Running crypto tests"
 swiftc -O -swift-version 5 Sources/VaultCrypto.swift Sources/PasswordPolicy.swift tests/main.swift -o build/crypto-tests
 ./build/crypto-tests
 
+echo "→ Running agent-access tests (protocol, process checks, approvals, socket attacks)"
+swiftc -O -swift-version 5 Sources/AgentProtocol.swift Sources/ProcessInspector.swift Sources/AccessController.swift \
+    Sources/AgentServer.swift tests/agent/main.swift -o build/agent-tests
+./build/agent-tests agent
+
+echo "→ Running app integration tests (throwaway home folder; your real vault is never touched)"
+APP_SOURCES=()
+for f in Sources/*.swift; do [ "$f" != "Sources/KeyVaultApp.swift" ] && APP_SOURCES+=("$f"); done
+swiftc -O -swift-version 5 -target "$(uname -m)-apple-macos14.0" "${APP_SOURCES[@]}" tests/integration/main.swift \
+    -o build/integration-tests
+./build/integration-tests agent
+
+echo "→ Running Python client tests"
+python3 -I -m unittest discover -s agent/tests
+
 echo "→ Compiling app"
 swiftc -O -parse-as-library -swift-version 5 -target "$(uname -m)-apple-macos14.0" \
     Sources/*.swift -o "$APP/Contents/MacOS/KeyVault"
 cp Info.plist "$APP/Contents/Info.plist"
 cp AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
 cp assets/logo.png "$APP/Contents/Resources/logo.png"
+cp agent/keyvault_client.py "$APP/Contents/Resources/keyvault_client.py"
 
 # Hardened runtime: ignores DYLD_INSERT_LIBRARIES, enforces library validation,
 # and (with no get-task-allow entitlement) blocks debugger attachment.
