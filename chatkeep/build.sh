@@ -1,0 +1,71 @@
+#!/bin/bash
+# Builds ChatKeep.app with the Swift toolchain only (no Xcode project, no dependencies).
+set -euo pipefail
+cd "$(dirname "$0")"
+
+NAME="ChatKeep"
+# Engine files (no UI) — compiled together with tests/main.swift.
+ENGINE_SOURCES=(Sources/SecretRules.swift Sources/RedactionEngine.swift Sources/VaultCrypto.swift Sources/VaultReader.swift
+    Sources/ZipReader.swift Sources/JSONStreamSplitter.swift Sources/ChatModels.swift Sources/Importers.swift
+    Sources/ExportReader.swift Sources/ArchiveCrypto.swift Sources/SearchIndex.swift Sources/LeakScan.swift Sources/ArchiveStore.swift)
+
+if ! command -v swiftc >/dev/null 2>&1; then
+  echo "✗ Swift compiler not found."
+  echo "  Install Apple's Command Line Tools, then run this script again:"
+  echo "    xcode-select --install"
+  exit 1
+fi
+if [ "$(sw_vers -productVersion | cut -d. -f1)" -lt 14 ]; then
+  echo "✗ $NAME needs macOS 14 (Sonoma) or later. You have $(sw_vers -productVersion)."
+  exit 1
+fi
+
+APP="build/$NAME.app"
+rm -rf "$APP"
+mkdir -p "$APP/Contents/MacOS" "$APP/Contents/Resources"
+
+if [ ! -f AppIcon.icns ] || [ tools/make_icon.swift -nt AppIcon.icns ]; then
+  echo "→ Rendering icon"
+  mkdir -p assets build/AppIcon.iconset
+  swift tools/make_icon.swift assets/logo.png
+  for s in 16 32 128 256 512; do
+    sips -z $s $s assets/logo.png --out build/AppIcon.iconset/icon_${s}x${s}.png >/dev/null
+    sips -z $((s*2)) $((s*2)) assets/logo.png --out build/AppIcon.iconset/icon_${s}x${s}@2x.png >/dev/null
+  done
+  iconutil -c icns build/AppIcon.iconset -o AppIcon.icns
+fi
+
+echo "→ Running engine tests (zip and JSON handling, importers, encryption, search, leak scan, archive store)"
+swiftc -O -swift-version 5 "${ENGINE_SOURCES[@]}" tests/main.swift -o build/tests
+./build/tests
+
+echo "→ Running app tests (the real app model in a throwaway folder; your real archive is never touched)"
+APP_SOURCES=()
+for f in Sources/*.swift; do [ "$f" != "Sources/ChatKeepApp.swift" ] && APP_SOURCES+=("$f"); done
+swiftc -O -swift-version 5 -target "$(uname -m)-apple-macos14.0" "${APP_SOURCES[@]}" tests/integration/main.swift -o build/integration-tests
+./build/integration-tests
+
+echo "→ Compiling app"
+swiftc -O -parse-as-library -swift-version 5 -target "$(uname -m)-apple-macos14.0" \
+    Sources/*.swift -o "$APP/Contents/MacOS/$NAME"
+cp Info.plist "$APP/Contents/Info.plist"
+cp AppIcon.icns "$APP/Contents/Resources/AppIcon.icns"
+cp assets/logo.png "$APP/Contents/Resources/logo.png"
+
+# Hardened runtime: ignores DYLD_INSERT_LIBRARIES, enforces library validation,
+# and (with no get-task-allow entitlement) blocks debugger attachment.
+# Files in iCloud-synced folders (e.g. Desktop) carry Finder metadata that codesign rejects.
+# Cloud-synced folders can re-attach Finder metadata at any moment, so clean and sign in a retry loop.
+signed=0
+for attempt in 1 2 3 4 5; do
+  xattr -cr "$APP"
+  if codesign --force --options runtime --entitlements App.entitlements --sign - "$APP" >/dev/null 2>&1; then signed=1; break; fi
+  sleep 1
+done
+if [ "$signed" != 1 ]; then
+  echo "✗ Code signing failed. If this folder is synced (iCloud, Dropbox), copy the project somewhere unsynced and build there."
+  exit 1
+fi
+echo "✓ Built $APP"
+echo "  Run:     open \"$APP\""
+echo "  Install: cp -R \"$APP\" /Applications/"

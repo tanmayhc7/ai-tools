@@ -69,9 +69,20 @@ enum SecretRules {
                                    "gsk_", "r8_", "sg.", "sk", "npm_", "://", "private key", "key",
                                    "secret", "token", "pass", "auth"]
 
+    private static let triggerBytes: [[UInt8]] = triggers.map { Array($0.utf8) }
+
+    /// Fast gate run on every message: one lowercase copy, then a C-speed substring search per trigger.
+    /// (Calling Swift's `String.contains` 25 times per message was the bottleneck on large archives.)
     static func mightContainSecret(_ text: String) -> Bool {
-        let lower = text.lowercased()
-        return triggers.contains { lower.contains($0) }
+        var lower = text.lowercased()
+        return lower.withUTF8 { buffer -> Bool in
+            guard let base = buffer.baseAddress, buffer.count > 0 else { return false }
+            for trigger in triggerBytes {
+                let found = trigger.withUnsafeBufferPointer { memmem(base, buffer.count, $0.baseAddress!, $0.count) }
+                if found != nil { return true }
+            }
+            return false
+        }
     }
 
     static func scan(_ text: String) -> [SecretMatch] {
