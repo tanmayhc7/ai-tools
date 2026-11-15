@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="LeakGuard logo">
+  <img src="../assets/icons/leakguard.png" width="128" alt="LeakGuard logo">
 </p>
 
 <h1 align="center">LeakGuard</h1>
@@ -7,6 +7,14 @@
 <p align="center">
   Find API keys and passwords that leaked into your code, including ones hidden in old git commits.<br>
   A native Mac app. Everything runs on your machine; nothing is uploaded.
+</p>
+
+<!-- badges -->
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-0A84FF?style=flat-square&logo=apple&logoColor=white">
+  <img alt="67 automated tests" src="https://img.shields.io/badge/automated%20tests-67-2EA043?style=flat-square">
+  <img alt="Network code: none" src="https://img.shields.io/badge/network%20code-none-D29922?style=flat-square">
+  <img alt="scans: files %2B git history" src="https://img.shields.io/badge/scans-files%20%2B%20git%20history-0F766E?style=flat-square">
 </p>
 
 ---

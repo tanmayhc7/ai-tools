@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="Redact logo">
+  <img src="../assets/icons/redact.png" width="128" alt="Redact logo">
 </p>
 
 <h1 align="center">Redact</h1>
@@ -8,6 +8,14 @@
   Use AI on real documents without handing over personal data.<br>
   Redact swaps names, emails, numbers and keys for placeholders, then puts them back in the AI's answer.<br>
   A native Mac app. Detection runs entirely on your machine.
+</p>
+
+<!-- badges -->
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-0A84FF?style=flat-square&logo=apple&logoColor=white">
+  <img alt="49 automated tests" src="https://img.shields.io/badge/automated%20tests-49-2EA043?style=flat-square">
+  <img alt="Network code: none" src="https://img.shields.io/badge/network%20code-none-D29922?style=flat-square">
+  <img alt="name detection: on--device" src="https://img.shields.io/badge/name%20detection-on--device-BE123C?style=flat-square">
 </p>
 
 ---

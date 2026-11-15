@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="ContextPack logo">
+  <img src="../assets/icons/contextpack.png" width="128" alt="ContextPack logo">
 </p>
 
 <h1 align="center">ContextPack</h1>
@@ -7,6 +7,14 @@
 <p align="center">
   Turn a code project into one prompt-ready block of text for any AI, with secrets removed automatically.<br>
   A native Mac app. Nothing leaves your machine until you paste it somewhere.
+</p>
+
+<!-- badges -->
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-0A84FF?style=flat-square&logo=apple&logoColor=white">
+  <img alt="54 automated tests" src="https://img.shields.io/badge/automated%20tests-54-2EA043?style=flat-square">
+  <img alt="Network code: none" src="https://img.shields.io/badge/network%20code-none-D29922?style=flat-square">
+  <img alt="secrets: auto--redacted" src="https://img.shields.io/badge/secrets-auto--redacted-D97706?style=flat-square">
 </p>
 
 ---
