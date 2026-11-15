@@ -140,10 +140,10 @@ cd ai-tools && git pull
 ```
 
 ```bash
-cd keyvault && ./build.sh && cp -R build/KeyVault.app /Applications/
+cd keyvault && ./build.sh && rm -rf /Applications/KeyVault.app && cp -R build/KeyVault.app /Applications/
 ```
 
-Your vault is stored separately from the app, so updating never touches your keys.
+Quit KeyVault first. Your vault is stored separately from the app, so updating never touches your keys.
 
 ### Uninstalling
 

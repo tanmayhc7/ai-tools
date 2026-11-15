@@ -100,6 +100,32 @@ The app is built with the hardened runtime, so code can't be injected into it.
 - Secret detection catches known key formats and random-looking `key = "..."` assignments. Review before sharing anything sensitive. [LeakGuard](../leakguard/) can check the KeyVault keys you know about.
 - The packed text is your code: anything you paste into an AI service goes to that service.
 
+### Updating and uninstalling
+
+**Update:** quit ContextPack, then:
+
+```bash
+cd ai-tools && git pull
+```
+
+```bash
+cd contextpack && ./build.sh && rm -rf /Applications/ContextPack.app && cp -R build/ContextPack.app /Applications/
+```
+
+(Remove the old copy first: copying over it would merge the two.) See the [main README](../README.md#updating) for more on updating, uninstalling and common build problems.
+
+**Uninstall:**
+
+1. Quit ContextPack, then delete the app:
+   ```bash
+   rm -rf /Applications/ContextPack.app
+   ```
+2. Optionally clear its saved preferences (only the output format):
+   ```bash
+   defaults delete local.contextpack.app
+   ```
+
+
 ## Troubleshooting
 
 | Problem | Fix |

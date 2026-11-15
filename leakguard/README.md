@@ -111,6 +111,32 @@ Other details:
 - Files over 5 MB and binary files (images, archives) are skipped.
 - Very short KeyVault entries (under 12 characters) aren't searched, to avoid false alarms.
 
+### Updating and uninstalling
+
+**Update:** quit LeakGuard, then:
+
+```bash
+cd ai-tools && git pull
+```
+
+```bash
+cd leakguard && ./build.sh && rm -rf /Applications/LeakGuard.app && cp -R build/LeakGuard.app /Applications/
+```
+
+(Remove the old copy first: copying over it would merge the two.) See the [main README](../README.md#updating) for more on updating, uninstalling and common build problems.
+
+**Uninstall:**
+
+1. Quit LeakGuard, then delete the app:
+   ```bash
+   rm -rf /Applications/LeakGuard.app
+   ```
+2. Optionally clear its saved preferences (it keeps no data of its own):
+   ```bash
+   defaults delete local.leakguard.app
+   ```
+
+
 ## Troubleshooting
 
 | Problem | Fix |

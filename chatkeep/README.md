@@ -142,6 +142,32 @@ A 109 MB export (20,000 conversations, 200,000 messages) on an Apple M4: importe
 - **Secrets in memory while unlocked.** Swift can't reliably wipe strings from memory. Locking drops them, and macOS encrypts swap.
 - **What was already shared.** Leak Check can tell you a key is in a chat, but it can't recall it. Rotate any real key it finds.
 
+### Updating and uninstalling
+
+**Update:** quit ChatKeep, then:
+
+```bash
+cd ai-tools && git pull
+```
+
+```bash
+cd chatkeep && ./build.sh && rm -rf /Applications/ChatKeep.app && cp -R build/ChatKeep.app /Applications/
+```
+
+(Remove the old copy first: copying over it would merge the two.) See the [main README](../README.md#updating) for more on updating, uninstalling and common build problems.
+
+**Uninstall:**
+
+1. Quit ChatKeep, then delete the app:
+   ```bash
+   rm -rf /Applications/ChatKeep.app
+   ```
+2. **Only if you want your archive and its backups gone for good**, delete its folder. This can't be undone:
+   ```bash
+   rm -rf ~/Library/Application\ Support/ChatKeep
+   ```
+
+
 ## Troubleshooting
 
 | Problem | Fix |
