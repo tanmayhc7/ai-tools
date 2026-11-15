@@ -96,12 +96,12 @@ Bundles a code project into one block of text for any AI. Respects <code>.gitign
 
 ```mermaid
 flowchart LR
-    KV["🔑 <b>KeyVault</b><br/>your keys, encrypted"]
-    LG["🛡️ <b>LeakGuard</b><br/>code and git history"]
-    CK["💬 <b>ChatKeep</b><br/>your past AI chats"]
+    KV["🔑 KeyVault<br/>your keys, encrypted"]
+    LG["🛡️ LeakGuard<br/>code and git history"]
+    CK["💬 ChatKeep<br/>your past AI chats"]
     AG["🤖 your scripts<br/>and agents"]
-    RD["🧾 <b>Redact</b><br/>before you paste text"]
-    CP["📦 <b>ContextPack</b><br/>before you share code"]
+    RD["🧾 Redact<br/>before you paste text"]
+    CP["📦 ContextPack<br/>before you share code"]
     AI(("AI"))
 
     KV -- "checks for exact keys" --> LG
@@ -130,7 +130,7 @@ flowchart LR
 
 ## Requirements
 
-| | |
+| What you need | Details |
 |---|---|
 | 🖥 **A Mac** | macOS 14 Sonoma or later, Apple Silicon or Intel |
 | 🛠 **Apple's Command Line Tools** | Free, about 1 GB. They include `swift`, `git` and `python3`, which the build and tests use. Full Xcode is **not** needed |
