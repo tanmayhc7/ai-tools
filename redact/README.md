@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="Redact logo">
+  <img src="../assets/icons/redact.png" width="128" alt="Redact logo">
 </p>
 
 <h1 align="center">Redact</h1>
@@ -8,6 +8,14 @@
   Use AI on real documents without handing over personal data.<br>
   Redact swaps names, emails, numbers and keys for placeholders, then puts them back in the AI's answer.<br>
   A native Mac app. Detection runs entirely on your machine.
+</p>
+
+<!-- badges -->
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-0A84FF?style=flat-square&logo=apple&logoColor=white">
+  <img alt="49 automated tests" src="https://img.shields.io/badge/automated%20tests-49-2EA043?style=flat-square">
+  <img alt="Network code: none" src="https://img.shields.io/badge/network%20code-none-D29922?style=flat-square">
+  <img alt="name detection: on--device" src="https://img.shields.io/badge/name%20detection-on--device-BE123C?style=flat-square">
 </p>
 
 ---
@@ -88,6 +96,32 @@ The build runs 49 self-tests first; every line should say `PASS`.
 - Addresses and phone numbers use Apple's built-in detectors, which are strongest for US and European formats.
 - Restore only works within the same session. After **Clear All** or quitting, the mapping is gone. That's by design.
 - Placeholders hide values, not context. "The CEO of a Cupertino phone company" still says a lot.
+
+### Updating and uninstalling
+
+**Update:** quit Redact, then:
+
+```bash
+cd ai-tools && git pull
+```
+
+```bash
+cd redact && ./build.sh && rm -rf /Applications/Redact.app && cp -R build/Redact.app /Applications/
+```
+
+(Remove the old copy first: copying over it would merge the two.) See the [main README](../README.md#updating) for more on updating, uninstalling and common build problems.
+
+**Uninstall:**
+
+1. Quit Redact, then delete the app:
+   ```bash
+   rm -rf /Applications/Redact.app
+   ```
+2. Optionally clear its saved preferences (only which categories are on):
+   ```bash
+   defaults delete local.redact.app
+   ```
+
 
 ## Troubleshooting
 

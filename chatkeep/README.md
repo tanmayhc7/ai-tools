@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="ChatKeep logo">
+  <img src="../assets/icons/chatkeep.png" width="128" alt="ChatKeep logo">
 </p>
 
 <h1 align="center">ChatKeep</h1>
@@ -7,6 +7,14 @@
 <p align="center">
   Your ChatGPT and Claude history, searchable in one place, encrypted, and checked for secrets you pasted by accident.<br>
   A native Mac app. Nothing is uploaded; there is no network code at all.
+</p>
+
+<!-- badges -->
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-0A84FF?style=flat-square&logo=apple&logoColor=white">
+  <img alt="210 automated tests" src="https://img.shields.io/badge/automated%20tests-210-2EA043?style=flat-square">
+  <img alt="Network code: none" src="https://img.shields.io/badge/network%20code-none-D29922?style=flat-square">
+  <img alt="search: offline and encrypted" src="https://img.shields.io/badge/search-offline%20and%20encrypted-9333EA?style=flat-square">
 </p>
 
 ---
@@ -58,7 +66,8 @@ The build runs 210 self-tests first; every line should say `PASS`.
 
 Keep the zip as it is. You don't need to unzip it, and ChatKeep reads only the conversation files inside it, even when the zip is several gigabytes of images.
 
-> ⚠️ **Delete the export after importing.** The zip holds your whole history in plain, readable form. Once ChatKeep has it, move the zip to the Trash and empty it.
+> [!WARNING]
+> **Delete the export after importing.** The zip holds your whole history in plain, readable form. Once ChatKeep has it, move the zip to the Trash and empty it.
 
 ## Using it
 
@@ -92,6 +101,7 @@ Keep the zip as it is. You don't need to unzip it, and ChatKeep reads only the c
 
 For ChatGPT, which stores edits and "regenerate" as a tree, ChatKeep keeps the conversation as you last saw it, not the abandoned branches.
 
+> [!NOTE]
 > **Honest note on formats.** Neither ChatGPT nor Claude publishes an official description of its export, and both have changed over time. ChatKeep is built to be forgiving: it accepts both known layouts for each service (including ChatGPT exports split across several files), ignores fields it doesn't know, and skips anything it can't understand rather than stopping. It was tested against files built to match those layouts and against hostile and broken files, but **not against your real export**. If an import looks wrong, please open an issue.
 
 ## Security design
@@ -141,6 +151,32 @@ A 109 MB export (20,000 conversations, 200,000 messages) on an Apple M4: importe
 - **A weak password.** Someone with a copy of `archive.chatkeep` can guess offline as fast as their hardware allows. Use four or more random words.
 - **Secrets in memory while unlocked.** Swift can't reliably wipe strings from memory. Locking drops them, and macOS encrypts swap.
 - **What was already shared.** Leak Check can tell you a key is in a chat, but it can't recall it. Rotate any real key it finds.
+
+### Updating and uninstalling
+
+**Update:** quit ChatKeep, then:
+
+```bash
+cd ai-tools && git pull
+```
+
+```bash
+cd chatkeep && ./build.sh && rm -rf /Applications/ChatKeep.app && cp -R build/ChatKeep.app /Applications/
+```
+
+(Remove the old copy first: copying over it would merge the two.) See the [main README](../README.md#updating) for more on updating, uninstalling and common build problems.
+
+**Uninstall:**
+
+1. Quit ChatKeep, then delete the app:
+   ```bash
+   rm -rf /Applications/ChatKeep.app
+   ```
+2. **Only if you want your archive and its backups gone for good**, delete its folder. This can't be undone:
+   ```bash
+   rm -rf ~/Library/Application\ Support/ChatKeep
+   ```
+
 
 ## Troubleshooting
 

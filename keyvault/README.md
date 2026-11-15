@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="KeyVault logo">
+  <img src="../assets/icons/keyvault.png" width="128" alt="KeyVault logo">
 </p>
 
 <h1 align="center">KeyVault</h1>
@@ -8,6 +8,14 @@
   A local-only, encrypted vault for your API keys: a native Mac app, not a command-line tool.<br>
   No cloud, no accounts, no network code, no third-party dependencies.<br>
   Optionally hands one key at a time to your own scripts or AI agents, only when you approve.
+</p>
+
+<!-- badges -->
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-0A84FF?style=flat-square&logo=apple&logoColor=white">
+  <img alt="194 automated tests" src="https://img.shields.io/badge/automated%20tests-194-2EA043?style=flat-square">
+  <img alt="Network code: none" src="https://img.shields.io/badge/network%20code-none-D29922?style=flat-square">
+  <img alt="agent access: off by default" src="https://img.shields.io/badge/agent%20access-off%20by%20default-4F46E5?style=flat-square">
 </p>
 
 ---
@@ -93,7 +101,8 @@ On first launch, choose a **master password**. The app enforces:
 
 **Tip:** four or more random words make a strong password that's still easy to type, e.g. `maple orbit cactus lantern`.
 
-> ⚠️ **There is no password recovery.** No one, including you, can open the vault without the master password. Write it down somewhere safe.
+> [!WARNING]
+> **There is no password recovery.** No one, including you, can open the vault without the master password. Write it down somewhere safe.
 
 ## Using it
 
@@ -140,10 +149,10 @@ cd ai-tools && git pull
 ```
 
 ```bash
-cd keyvault && ./build.sh && cp -R build/KeyVault.app /Applications/
+cd keyvault && ./build.sh && rm -rf /Applications/KeyVault.app && cp -R build/KeyVault.app /Applications/
 ```
 
-Your vault is stored separately from the app, so updating never touches your keys.
+Quit KeyVault first. Your vault is stored separately from the app, so updating never touches your keys.
 
 ### Uninstalling
 

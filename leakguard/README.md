@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" width="128" alt="LeakGuard logo">
+  <img src="../assets/icons/leakguard.png" width="128" alt="LeakGuard logo">
 </p>
 
 <h1 align="center">LeakGuard</h1>
@@ -7,6 +7,14 @@
 <p align="center">
   Find API keys and passwords that leaked into your code, including ones hidden in old git commits.<br>
   A native Mac app. Everything runs on your machine; nothing is uploaded.
+</p>
+
+<!-- badges -->
+<p align="center">
+  <img alt="macOS 14+" src="https://img.shields.io/badge/macOS-14%2B-0A84FF?style=flat-square&logo=apple&logoColor=white">
+  <img alt="67 automated tests" src="https://img.shields.io/badge/automated%20tests-67-2EA043?style=flat-square">
+  <img alt="Network code: none" src="https://img.shields.io/badge/network%20code-none-D29922?style=flat-square">
+  <img alt="scans: files %2B git history" src="https://img.shields.io/badge/scans-files%20%2B%20git%20history-0F766E?style=flat-square">
 </p>
 
 ---
@@ -110,6 +118,32 @@ Other details:
 - Pattern matching catches known key formats plus random-looking `key = "..."` assignments. A key in an unusual format with an innocent variable name can be missed; that's what the **KeyVault check** is for.
 - Files over 5 MB and binary files (images, archives) are skipped.
 - Very short KeyVault entries (under 12 characters) aren't searched, to avoid false alarms.
+
+### Updating and uninstalling
+
+**Update:** quit LeakGuard, then:
+
+```bash
+cd ai-tools && git pull
+```
+
+```bash
+cd leakguard && ./build.sh && rm -rf /Applications/LeakGuard.app && cp -R build/LeakGuard.app /Applications/
+```
+
+(Remove the old copy first: copying over it would merge the two.) See the [main README](../README.md#updating) for more on updating, uninstalling and common build problems.
+
+**Uninstall:**
+
+1. Quit LeakGuard, then delete the app:
+   ```bash
+   rm -rf /Applications/LeakGuard.app
+   ```
+2. Optionally clear its saved preferences (it keeps no data of its own):
+   ```bash
+   defaults delete local.leakguard.app
+   ```
+
 
 ## Troubleshooting
 
