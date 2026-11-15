@@ -24,6 +24,14 @@
 
 ---
 
+## See it in motion
+
+<p align="center">
+  <img src="docs/roundtrip.gif" width="100%" alt="Animation: text is redacted, sent to an AI, and the reply is restored">
+</p>
+
+Want the full walkthrough? See [how it works inside](DEVELOPER.md).
+
 ## How it works
 
 ```

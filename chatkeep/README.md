@@ -23,6 +23,14 @@
 
 ---
 
+## See it in motion
+
+<p align="center">
+  <img src="docs/import.gif" width="100%" alt="Animation: a chat export is imported, encrypted and made searchable">
+</p>
+
+Want the full walkthrough? See [how it works inside](DEVELOPER.md).
+
 ## What it does
 
 - **Imports your exports** from ChatGPT and Claude: the zip file as it arrives by email, an unzipped folder, or a single JSON file

@@ -23,6 +23,14 @@
 
 ---
 
+## See it in motion
+
+<p align="center">
+  <img src="docs/pack.gif" width="100%" alt="Animation: git lists files, secrets are removed, one prompt comes out">
+</p>
+
+Want the full walkthrough? See [how it works inside](DEVELOPER.md).
+
 ## What it does
 
 - **Pick a project folder** and tick the files you want. Whole folders can be ticked at once

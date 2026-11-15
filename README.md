@@ -43,6 +43,14 @@ Real Mac apps, each under 4 MB, with no third-party code. Each one builds in und
 </tr>
 </table>
 
+## See it in motion
+
+<p align="center">
+  <img src="keyvault/docs/agent-handoff.gif" width="100%" alt="Animation: an AI agent asks KeyVault for a key, you approve, and it is handed over">
+</p>
+
+Every tool has its own animated walkthrough in its folder: [KeyVault](keyvault/DEVELOPER.md), [LeakGuard](leakguard/DEVELOPER.md), [Redact](redact/DEVELOPER.md), [ContextPack](contextpack/DEVELOPER.md), [ChatKeep](chatkeep/DEVELOPER.md).
+
 ## The tools
 
 <table>
