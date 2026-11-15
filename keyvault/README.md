@@ -18,6 +18,10 @@
   <img alt="agent access: off by default" src="https://img.shields.io/badge/agent%20access-off%20by%20default-4F46E5?style=flat-square">
 </p>
 
+<p align="center">
+  <b><a href="DEVELOPER.md">🧭 How KeyVault works inside</a></b> &nbsp;·&nbsp; <a href="../README.md">All tools</a> &nbsp;·&nbsp; <a href="../LICENSE">AGPL-3.0</a>
+</p>
+
 ---
 
 ## What it does
@@ -346,3 +350,9 @@ keyvault/
 ```
 
 `./build.sh` runs all 194 tests before building. None of them touch your real vault.
+
+---
+
+<p align="center">
+  <sub>Part of <a href="../README.md">ai-tools</a> · <a href="DEVELOPER.md">developer guide</a> · licensed under the <a href="../LICENSE">GNU AGPL v3</a></sub>
+</p>

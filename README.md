@@ -8,6 +8,7 @@
   <img alt="574 automated tests" src="https://img.shields.io/badge/automated%20tests-574-2EA043?style=for-the-badge">
   <img alt="Runs 100% locally" src="https://img.shields.io/badge/data-stays%20on%20your%20Mac-8957E5?style=for-the-badge">
   <img alt="No network code" src="https://img.shields.io/badge/network%20code-none-D29922?style=for-the-badge">
+  <a href="LICENSE"><img alt="License: AGPL v3" src="https://img.shields.io/badge/license-AGPL%20v3-1F6FEB?style=for-the-badge"></a>
 </p>
 
 <h3 align="center">
@@ -271,12 +272,44 @@ defaults delete local.keyvault.app
 | macOS says an app "is damaged" or can't be opened | You copied it from another Mac. Right-click → **Open**, or rebuild it on this Mac |
 | Windows or Linux | Not supported: these are Mac apps |
 
+## For developers
+
+Want to know how a tool works, check it, or change it? Each tool has a **developer guide** written for people who are new to the code, with flow diagrams and a looping animation of its main flow.
+
+| | Guide | What you'll learn |
+|---|---|---|
+| <img src="assets/icons/keyvault.png" width="26"> | [KeyVault: how it works inside](keyvault/DEVELOPER.md) | the encrypted vault, saving safely, and the approve-each-request handoff to scripts |
+| <img src="assets/icons/leakguard.png" width="26"> | [LeakGuard: how it works inside](leakguard/DEVELOPER.md) | recognising keys, replaying git history, running git safely, the hook |
+| <img src="assets/icons/redact.png" width="26"> | [Redact: how it works inside](redact/DEVELOPER.md) | detecting private data, placeholders, putting values back |
+| <img src="assets/icons/chatkeep.png" width="26"> | [ChatKeep: how it works inside](chatkeep/DEVELOPER.md) | streaming huge zips, the encrypted archive, in-memory search |
+| <img src="assets/icons/contextpack.png" width="26"> | [ContextPack: how it works inside](contextpack/DEVELOPER.md) | choosing files via git, never reading credentials, safe output formats |
+
+**Tools for contributors** (all in [`tools/`](tools/)):
+
+| Script | What it does |
+|---|---|
+| `tools/check-shared.sh` | Checks that source files shared between tools are still identical. Each tool builds on its own, so shared code is **copied**. Run it after changing any shared file |
+| `tools/make_animations.swift` | Redraws the six animations in the developer guides |
+| `tools/make_banner.swift` | Redraws the banner at the top of this page |
+
+```bash
+tools/check-shared.sh
+```
+
 ## Reporting problems safely
 
 Open an [issue](https://github.com/tanmayhc7/ai-tools/issues) for bugs, questions and ideas.
 
 > [!CAUTION]
 > **Never paste real API keys, vault files, ChatKeep archives or real conversations into an issue.** Describe what happened, or use made-up values.
+
+## License
+
+ai-tools is free software, released under the **[GNU Affero General Public License, version 3](LICENSE)** (AGPL-3.0).
+
+In plain words: you may use, study, change and share it. If you share a changed version, or let people use a changed version over a network, you must offer them the source code under the same license. There is no warranty. This is a summary, not legal advice; the [license text](LICENSE) is what counts.
+
+Copyright © 2026 Tanmay Chandavarkar. Contributions are accepted under the same license.
 
 <br>
 
