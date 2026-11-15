@@ -17,6 +17,10 @@
   <img alt="scans: files %2B git history" src="https://img.shields.io/badge/scans-files%20%2B%20git%20history-0F766E?style=flat-square">
 </p>
 
+<p align="center">
+  <b><a href="DEVELOPER.md">🧭 How LeakGuard works inside</a></b> &nbsp;·&nbsp; <a href="../README.md">All tools</a> &nbsp;·&nbsp; <a href="../LICENSE">AGPL-3.0</a>
+</p>
+
 ---
 
 ## What it does
@@ -174,3 +178,9 @@ leakguard/
 ├── tests/main.swift         67 tests, including booby-trapped repos
 └── tools/make_icon.swift    Draws the app icon
 ```
+
+---
+
+<p align="center">
+  <sub>Part of <a href="../README.md">ai-tools</a> · <a href="DEVELOPER.md">developer guide</a> · licensed under the <a href="../LICENSE">GNU AGPL v3</a></sub>
+</p>

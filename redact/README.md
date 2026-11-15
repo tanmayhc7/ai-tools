@@ -18,6 +18,10 @@
   <img alt="name detection: on--device" src="https://img.shields.io/badge/name%20detection-on--device-BE123C?style=flat-square">
 </p>
 
+<p align="center">
+  <b><a href="DEVELOPER.md">🧭 How Redact works inside</a></b> &nbsp;·&nbsp; <a href="../README.md">All tools</a> &nbsp;·&nbsp; <a href="../LICENSE">AGPL-3.0</a>
+</p>
+
 ---
 
 ## How it works
@@ -146,3 +150,9 @@ redact/
 ├── tests/main.swift           49 tests, including hostile inputs
 └── tools/make_icon.swift
 ```
+
+---
+
+<p align="center">
+  <sub>Part of <a href="../README.md">ai-tools</a> · <a href="DEVELOPER.md">developer guide</a> · licensed under the <a href="../LICENSE">GNU AGPL v3</a></sub>
+</p>

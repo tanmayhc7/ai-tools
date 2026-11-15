@@ -17,6 +17,10 @@
   <img alt="search: offline and encrypted" src="https://img.shields.io/badge/search-offline%20and%20encrypted-9333EA?style=flat-square">
 </p>
 
+<p align="center">
+  <b><a href="DEVELOPER.md">🧭 How ChatKeep works inside</a></b> &nbsp;·&nbsp; <a href="../README.md">All tools</a> &nbsp;·&nbsp; <a href="../LICENSE">AGPL-3.0</a>
+</p>
+
 ---
 
 ## What it does
@@ -214,3 +218,9 @@ chatkeep/
 ├── tests/integration/main.swift 33 tests of the real app model
 └── tools/make_icon.swift        Draws the app icon
 ```
+
+---
+
+<p align="center">
+  <sub>Part of <a href="../README.md">ai-tools</a> · <a href="DEVELOPER.md">developer guide</a> · licensed under the <a href="../LICENSE">GNU AGPL v3</a></sub>
+</p>

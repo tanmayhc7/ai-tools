@@ -17,6 +17,10 @@
   <img alt="secrets: auto--redacted" src="https://img.shields.io/badge/secrets-auto--redacted-D97706?style=flat-square">
 </p>
 
+<p align="center">
+  <b><a href="DEVELOPER.md">🧭 How ContextPack works inside</a></b> &nbsp;·&nbsp; <a href="../README.md">All tools</a> &nbsp;·&nbsp; <a href="../LICENSE">AGPL-3.0</a>
+</p>
+
 ---
 
 ## What it does
@@ -158,3 +162,9 @@ contextpack/
 ├── tests/main.swift            54 tests
 └── tools/make_icon.swift
 ```
+
+---
+
+<p align="center">
+  <sub>Part of <a href="../README.md">ai-tools</a> · <a href="DEVELOPER.md">developer guide</a> · licensed under the <a href="../LICENSE">GNU AGPL v3</a></sub>
+</p>
