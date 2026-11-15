@@ -23,6 +23,14 @@
 
 ---
 
+## See it in motion
+
+<p align="center">
+  <img src="docs/scan.gif" width="100%" alt="Animation: LeakGuard scans staged changes and blocks a commit containing a key">
+</p>
+
+Want the full walkthrough? See [how it works inside](DEVELOPER.md).
+
 ## What it does
 
 - **Scans a project folder** for API keys, tokens, private keys and passwords: OpenAI, Anthropic, AWS, GitHub, GitLab, Stripe, Google, Slack, Hugging Face, Groq, Replicate, SendGrid, Twilio, npm, database URLs and more

@@ -24,6 +24,18 @@
 
 ---
 
+## See it in motion
+
+<p align="center">
+  <img src="docs/unlock.gif" width="100%" alt="Animation: the master password is stretched, checked, and unlocks the vault">
+</p>
+
+<p align="center">
+  <img src="docs/agent-handoff.gif" width="100%" alt="Animation: an AI agent asks for a key, you approve, and it is handed over">
+</p>
+
+Want the full walkthrough? See [how it works inside](DEVELOPER.md).
+
 ## What it does
 
 - Stores API keys with a name, service and notes, all encrypted with one master password
